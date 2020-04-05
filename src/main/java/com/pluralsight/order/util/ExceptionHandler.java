@@ -12,8 +12,8 @@ public class ExceptionHandler {
      * @param sqlException Exception from which information will be extracted
      */
     public static void handleException(SQLException sqlException) {
-       System.out.println(error code);
-        System.out.println(SQL state);
+       System.out.println(errorcode);
+        System.out.println(SQLstate);
         System.out.println(ex);
         //                Finally, call the method that prints the exception's stack trace to the console.
 
