@@ -30,20 +30,17 @@ public class GetOrderDao {
     public OrderDto getOrderById(ParamsDto paramsDto) {
         OrderDto orderDto = null;
 
-        try (Connection con = DriverManager.getConnection(url);
+        try (Connection con = database.getConnection();
              PreparedStatement ps = createPreparedStatement(con, paramsDto.getOrderId());
              ResultSet rs = createResultSet(ps);
-
-           //  while (rs.next()) {
-            orderDto oD = new OrderDto();
-            rs.setOrderId(rs.getInt("OrderId"));
-            rs.setCustomerId(rs.getLong("order_customer_id"));
-            rs.setDate(rs.getDate("order_date"));
-            rs.setStatus(rs.getString("order_status"));
-         //   }
-
-     //    } {
-
+            ) {
+            if(rs.next()) {
+            orderDto = new OrderDto();
+                orderDto.setOrderId(rs.getLong("OrderId"));
+                orderDto.setCustomerId(rs.getLong("order_customer_id"));
+                orderDto.setDate(rs.getTimestamp("order_date"));
+                orderDto.setStatus(rs.getString("order_status"));
+            }
         } catch (SQLException ex) {
             ExceptionHandler.handleException(ex);
         }
@@ -60,11 +57,9 @@ public class GetOrderDao {
      * @throws SQLException In case of an error
      */
     private PreparedStatement createPreparedStatement(Connection con, long orderId) throws SQLException {
-
         PreparedStatement pState = con.prepareStatement(query);
-        preparedStatement.setString(1, orderId );
-
-        return null;
+        pState.setLong(1, orderId );
+        return pState;
     }
 
     /**
@@ -74,6 +69,7 @@ public class GetOrderDao {
      * @throws SQLException In case of an error
      */
     private ResultSet createResultSet(PreparedStatement ps) throws SQLException {
-        ResultSet result = preparedStatement.executeQuery();
+       return ps.executeQuery();
     }
+
 }
