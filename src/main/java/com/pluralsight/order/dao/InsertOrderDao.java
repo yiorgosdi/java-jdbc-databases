@@ -1,11 +1,13 @@
 package com.pluralsight.order.dao;
-
+import com.pluralsight.order.util.OrderStatus;
 import com.pluralsight.order.dto.OrderDto;
 import com.pluralsight.order.dto.OrderDetailDto;
 import com.pluralsight.order.util.Database;
 import com.pluralsight.order.util.ExceptionHandler;
+import java.time.LocalDateTime;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 
 /**
  * DAO to insert an order
