@@ -27,6 +27,7 @@ public class InsertOrderDao {
      * @param database Database object
      */
     public InsertOrderDao(Database database) {
+
         this.database = database;
     }
 
